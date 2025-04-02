@@ -1,0 +1,228 @@
+---
+title: "Get Started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get Started}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+# Make sure the examples are available 
+# use try-catch since Github may limit rate
+library(bidsr)
+has_examples <- tryCatch({
+  example_root <- download_bids_examples()
+  TRUE
+}, error = function(e) {
+  FALSE
+})
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = has_examples,
+  echo = TRUE
+)
+```
+
+Brain Imaging Data Structure (`BIDS`) is a standard for organizing neuroimaging and behavioral data (see https://bids.neuroimaging.io/index.html). 
+
+The goal of package `bidsr` is to provide comprehensive tools to query and manipulate 'BIDS' data files. 
+
+This vignette aims to demonstrate high-level tools to query a 'BIDS' project. The code requires executing a built-in command to download ['BIDS' example data-sets](https://github.com/bids-standard/bids-examples). Please copy-paste-run the following R commands:
+
+```{r setup}
+library(bidsr)
+example_root <- download_bids_examples()
+```
+
+## Overview of a `BIDS` project
+
+Let's inspect the project `ds000117` from the official `BIDS` example repository:
+
+```{r}
+project_path <- file.path(example_root, "ds000117")
+project <- bids_project(path = project_path)
+
+print(project)
+```
+
+### File `dataset_description.json`
+
+The top-level data description can be parsed via
+
+```{r}
+description <- project$get_bids_dataset_description()
+```
+
+To obtain the values, use `$` or `@` operator (same as `.` in `Python`):
+
+```{r}
+description$BIDSVersion
+
+# or 
+description@BIDSVersion
+```
+
+### File `participants.tsv`
+
+File `participants.tsv` is a top-level tabular that lists all the subjects. This file can be queried via method `get_participants`:
+
+```{r}
+participants <- project$get_bids_participants()
+```
+
+Alternatively, we can read any `tsv` file with `as_bids_tabular`
+
+```{r}
+participant_path <- file.path(project, "participants.tsv")
+as_bids_tabular(participant_path, cls = BIDSTabularParticipants)
+```
+
+## Instantiate a `BIDS` subject
+
+Given a project path or instance, a `BIDS` subject can be instantiated via
+
+```{r}
+subject <- bids_subject(
+  project = project, 
+  subject_code = "sub-06"
+)
+
+print(subject)
+```
+
+All `BIDS` subjects have entity key `sub-` that marks the subject code, for example, `sub-06` means subject `06`, hence the entity key `sub-` can be omitted, and `bidsr` accepts input such as `subject_code = "06"`. 
+
+If `project` is not instantiated, its path is also acceptable, check this alternative:
+
+```{r}
+subject <- bids_subject(
+  project = project_path, 
+  subject_code = "06"
+)
+```
+
+### Raw, source, or derivative data
+
+`BIDS` mainly focuses on regulating the raw data, however, it also supports formatting source data and derivatives. The corresponding paths can be queried via `resolve_bids_path` method. To resolve the root path for raw/source data,
+
+```{r}
+# resolve subject path (raw data by default)
+resolve_bids_path(subject)
+
+resolve_bids_path(subject, storage = "source")
+```
+
+For derivatives, please specify the derivative names, for example:
+
+```{r}
+resolve_bids_path(subject, storage = "derivative", prefix = "freesurfer")
+```
+
+
+### Query subject files by types
+
+The official `BIDS` and its extensions support various of data types, such as `anat`, `func`, `meg`, `eeg`, `ieeg`, etc.
+
+To query the data files by type, use `query_bids` method. The following example shows all the `anat` data path, and its potential meta files
+
+```{r}
+query_bids(subject, "anat")
+```
+
+
+To use fine-grained search parameters, replace `'anat'` with a list of search parameters. 
+
+```{r}
+query_bids(subject, list(
+  # dataset to filter, choices are raw, source, or derivative
+  storage = "raw",
+  
+  # include JSON sidecars; default is `FALSE`  
+  sidecars = FALSE,
+  
+  # set to `NULL` to include all data types
+  data_types = "anat",
+  
+  # filter all suffixes
+  suffixes = NULL
+))
+```
+
+Here is another example that filters derivative files that are `BIDS` compliant.
+
+```{r}
+query_bids(subject, list(
+  # filter derivatives
+  storage = "derivative",
+  
+  # filter `derivatives/meg_derivatives` folder
+  prefix = "meg_derivatives",
+
+  # include JSON sidecars
+  sidecars = TRUE,
+  
+  # set to `NULL` to include all data types
+  data_types = NULL,
+  
+  # only keep files with *_meg/log.* suffixes
+  suffixes = c("meg", "log")
+))
+```
+
+## Filter & get `BIDS` entity
+
+Here is an example of filtering `func` event files with `BIDS` entity `run=02`
+The first column contains a list of file instances. Here's an example to read the `ACPC` electrode coordinates:
+
+```{r}
+filter_result <- query_bids(subject, list(
+  storage = "raw",
+  sidecars = FALSE,
+  
+  data_types = "func",
+  suffixes = "events",
+  
+  # use R "formula" to filter entities
+  entity_filters = list(
+
+    # entity_key ~ expression returning TRUE/FALSE
+    # When filtering the entities, `entity_key` will be
+    # replaced with its value
+    run ~ as.integer(run) == 2
+  )
+))
+filter_result
+```
+
+The first column `"filter_result"` is the parsed file object with entity information:
+
+```{r}
+event_file <- filter_result$parsed[[1]]
+event_file
+```
+
+To get entity values, use `get_bids_entity`:
+
+```{r}
+get_bids_entity(event_file, "task")
+```
+
+If supported by schema, the `BIDS` entity rules for the file can be queried via `get_bids_entity_rules(event_file)` method
+
+Object `event_file` is relative to the project root, hence can be read by joining the project root path
+
+```{r}
+event_path <- file.path(project, event_file)
+
+# or 
+event_path <- resolve_bids_path(project, format(event_file))
+
+as_bids_tabular(event_path)
+```
+
+
