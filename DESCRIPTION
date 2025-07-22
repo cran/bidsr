@@ -1,6 +1,6 @@
 Package: bidsr
 Title: A Brain Imaging Data Structure ('BIDS') Parser
-Version: 0.1.0
+Version: 0.1.1
 URL: https://dipterix.org/bidsr/, https://github.com/dipterix/bidsr/
 BugReports: https://github.com/dipterix/bidsr/issues
 Authors@R: 
@@ -37,11 +37,12 @@ Suggests: knitr, rmarkdown, testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2025-04-01 14:48:04 UTC; dipterix
-Author: Zhengjia Wang [aut, cre] (<https://orcid.org/0000-0001-5629-1116>),
+Packaged: 2025-07-22 17:36:45 UTC; dipterix
+Author: Zhengjia Wang [aut, cre] (ORCID:
+    <https://orcid.org/0000-0001-5629-1116>),
   Trustees of the University of Pennsylvania [cph] (All files in this
     package unless explicitly stated in the file or listed in the
     'Copyright' section below.)
 Maintainer: Zhengjia Wang <dipterix.wang@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-04-02 17:40:08 UTC
+Date/Publication: 2025-07-22 18:20:54 UTC

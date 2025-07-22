@@ -135,3 +135,9 @@ event_path <- resolve_bids_path(project, format(event_file))
 
 as_bids_tabular(event_path)
 
+## ----cleanup, echo = FALSE, results='hide'------------------------------------
+cache_root <- tools::R_user_dir(package = "bidsr", which = "cache")
+if(file.exists(cache_root)) {
+  unlink(cache_root, recursive = TRUE)
+}
+
