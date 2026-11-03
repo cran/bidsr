@@ -609,23 +609,40 @@ data types, such as <code>anat</code>, <code>func</code>,
 The following example shows all the <code>anat</code> data path, and its
 potential meta files</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">query_bids</span>(subject, <span class="st">&quot;anat&quot;</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt;           parsed data_type suffix extension    sub    ses    acq   run  echo</span></span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt;           &lt;AsIs&gt;    &lt;char&gt; &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt; &lt;int&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt;  1: sub-06/s....      anat    T1w    nii.gz     06    mri mprage    NA    NA</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt;  2: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     1</span></span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt;  3: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     2</span></span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt;  4: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     3</span></span>
-<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt;  5: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     4</span></span>
-<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt;  6: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     5</span></span>
-<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt;  7: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     6</span></span>
-<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt;  8: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     7</span></span>
-<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt;  9: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     1</span></span>
-<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt; 10: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     2</span></span>
-<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; 11: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     3</span></span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; 12: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     4</span></span>
-<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; 13: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     5</span></span>
-<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt; 14: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     6</span></span>
-<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt; 15: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     7</span></span></code></pre></div>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt;                                                           parsed data_type</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a><span class="co">#&gt;                                                           &lt;AsIs&gt;    &lt;char&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="co">#&gt;  1:     sub-06/ses-mri/anat/sub-06_ses-mri_acq-mprage_T1w.nii.gz      anat</span></span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="co">#&gt;  2: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-1_FLASH.nii.gz      anat</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt;  3: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-2_FLASH.nii.gz      anat</span></span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a><span class="co">#&gt;  4: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-3_FLASH.nii.gz      anat</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co">#&gt;  5: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-4_FLASH.nii.gz      anat</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="co">#&gt;  6: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-5_FLASH.nii.gz      anat</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="co">#&gt;  7: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-6_FLASH.nii.gz      anat</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="co">#&gt;  8: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-7_FLASH.nii.gz      anat</span></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co">#&gt;  9: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-1_FLASH.nii.gz      anat</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="co">#&gt; 10: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-2_FLASH.nii.gz      anat</span></span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; 11: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-3_FLASH.nii.gz      anat</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; 12: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-4_FLASH.nii.gz      anat</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt; 13: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-5_FLASH.nii.gz      anat</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt; 14: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-6_FLASH.nii.gz      anat</span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt; 15: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-7_FLASH.nii.gz      anat</span></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="co">#&gt;     suffix extension    sub    ses    acq   run  echo</span></span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt;     &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt;  1:    T1w    nii.gz     06    mri mprage    NA    NA</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt;  2:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     1</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt;  3:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     2</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt;  4:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     3</span></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt;  5:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     4</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt;  6:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     5</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt;  7:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     6</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a><span class="co">#&gt;  8:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     7</span></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co">#&gt;  9:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     1</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a><span class="co">#&gt; 10:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     2</span></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a><span class="co">#&gt; 11:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     3</span></span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a><span class="co">#&gt; 12:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     4</span></span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a><span class="co">#&gt; 13:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     5</span></span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a><span class="co">#&gt; 14:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     6</span></span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a><span class="co">#&gt; 15:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     7</span></span></code></pre></div>
 <p>To use fine-grained search parameters, replace <code>&#39;anat&#39;</code>
 with a list of search parameters.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">query_bids</span>(subject, <span class="fu">list</span>(</span>
@@ -641,23 +658,40 @@ with a list of search parameters.</p>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  <span class="co"># filter all suffixes</span></span>
 <span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>  <span class="at">suffixes =</span> <span class="cn">NULL</span></span>
 <span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>))</span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt;           parsed data_type suffix extension    sub    ses    acq   run  echo</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;           &lt;AsIs&gt;    &lt;char&gt; &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt; &lt;int&gt;</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt;  1: sub-06/s....      anat    T1w    nii.gz     06    mri mprage    NA    NA</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt;  2: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     1</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt;  3: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     2</span></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt;  4: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     3</span></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co">#&gt;  5: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     4</span></span>
-<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="co">#&gt;  6: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     5</span></span>
-<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#&gt;  7: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     6</span></span>
-<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#&gt;  8: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     7</span></span>
-<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt;  9: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     1</span></span>
-<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="co">#&gt; 10: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     2</span></span>
-<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; 11: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     3</span></span>
-<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="co">#&gt; 12: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     4</span></span>
-<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; 13: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     5</span></span>
-<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt; 14: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     6</span></span>
-<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; 15: sub-06/s....      anat  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     7</span></span></code></pre></div>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="co">#&gt;                                                           parsed data_type</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt;                                                           &lt;AsIs&gt;    &lt;char&gt;</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt;  1:     sub-06/ses-mri/anat/sub-06_ses-mri_acq-mprage_T1w.nii.gz      anat</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt;  2: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-1_FLASH.nii.gz      anat</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt;  3: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-2_FLASH.nii.gz      anat</span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt;  4: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-3_FLASH.nii.gz      anat</span></span>
+<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="co">#&gt;  5: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-4_FLASH.nii.gz      anat</span></span>
+<span id="cb12-21"><a href="#cb12-21" tabindex="-1"></a><span class="co">#&gt;  6: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-5_FLASH.nii.gz      anat</span></span>
+<span id="cb12-22"><a href="#cb12-22" tabindex="-1"></a><span class="co">#&gt;  7: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-6_FLASH.nii.gz      anat</span></span>
+<span id="cb12-23"><a href="#cb12-23" tabindex="-1"></a><span class="co">#&gt;  8: sub-06/ses-mri/anat/sub-06_ses-mri_run-1_echo-7_FLASH.nii.gz      anat</span></span>
+<span id="cb12-24"><a href="#cb12-24" tabindex="-1"></a><span class="co">#&gt;  9: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-1_FLASH.nii.gz      anat</span></span>
+<span id="cb12-25"><a href="#cb12-25" tabindex="-1"></a><span class="co">#&gt; 10: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-2_FLASH.nii.gz      anat</span></span>
+<span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co">#&gt; 11: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-3_FLASH.nii.gz      anat</span></span>
+<span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a><span class="co">#&gt; 12: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-4_FLASH.nii.gz      anat</span></span>
+<span id="cb12-28"><a href="#cb12-28" tabindex="-1"></a><span class="co">#&gt; 13: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-5_FLASH.nii.gz      anat</span></span>
+<span id="cb12-29"><a href="#cb12-29" tabindex="-1"></a><span class="co">#&gt; 14: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-6_FLASH.nii.gz      anat</span></span>
+<span id="cb12-30"><a href="#cb12-30" tabindex="-1"></a><span class="co">#&gt; 15: sub-06/ses-mri/anat/sub-06_ses-mri_run-2_echo-7_FLASH.nii.gz      anat</span></span>
+<span id="cb12-31"><a href="#cb12-31" tabindex="-1"></a><span class="co">#&gt;     suffix extension    sub    ses    acq   run  echo</span></span>
+<span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a><span class="co">#&gt;     &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;char&gt; &lt;int&gt; &lt;int&gt;</span></span>
+<span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a><span class="co">#&gt;  1:    T1w    nii.gz     06    mri mprage    NA    NA</span></span>
+<span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a><span class="co">#&gt;  2:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     1</span></span>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt;  3:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     2</span></span>
+<span id="cb12-36"><a href="#cb12-36" tabindex="-1"></a><span class="co">#&gt;  4:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     3</span></span>
+<span id="cb12-37"><a href="#cb12-37" tabindex="-1"></a><span class="co">#&gt;  5:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     4</span></span>
+<span id="cb12-38"><a href="#cb12-38" tabindex="-1"></a><span class="co">#&gt;  6:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     5</span></span>
+<span id="cb12-39"><a href="#cb12-39" tabindex="-1"></a><span class="co">#&gt;  7:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     6</span></span>
+<span id="cb12-40"><a href="#cb12-40" tabindex="-1"></a><span class="co">#&gt;  8:  FLASH    nii.gz     06    mri   &lt;NA&gt;     1     7</span></span>
+<span id="cb12-41"><a href="#cb12-41" tabindex="-1"></a><span class="co">#&gt;  9:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     1</span></span>
+<span id="cb12-42"><a href="#cb12-42" tabindex="-1"></a><span class="co">#&gt; 10:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     2</span></span>
+<span id="cb12-43"><a href="#cb12-43" tabindex="-1"></a><span class="co">#&gt; 11:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     3</span></span>
+<span id="cb12-44"><a href="#cb12-44" tabindex="-1"></a><span class="co">#&gt; 12:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     4</span></span>
+<span id="cb12-45"><a href="#cb12-45" tabindex="-1"></a><span class="co">#&gt; 13:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     5</span></span>
+<span id="cb12-46"><a href="#cb12-46" tabindex="-1"></a><span class="co">#&gt; 14:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     6</span></span>
+<span id="cb12-47"><a href="#cb12-47" tabindex="-1"></a><span class="co">#&gt; 15:  FLASH    nii.gz     06    mri   &lt;NA&gt;     2     7</span></span></code></pre></div>
 <p>Here is another example that filters derivative files that are
 <code>BIDS</code> compliant.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">query_bids</span>(subject, <span class="fu">list</span>(</span>
@@ -676,38 +710,38 @@ with a list of search parameters.</p>
 <span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>  <span class="co"># only keep files with *_meg/log.* suffixes</span></span>
 <span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">&quot;meg&quot;</span>, <span class="st">&quot;log&quot;</span>)</span>
 <span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>))</span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt;           parsed data_type suffix extension    sub    ses            task</span></span>
-<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt;           &lt;AsIs&gt;    &lt;char&gt; &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;          &lt;char&gt;</span></span>
-<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt;  1: derivati....     _root    meg      json     06    meg facerecognition</span></span>
-<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt;  2: derivati....       meg    meg      json     06    meg facerecognition</span></span>
-<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt;  3: derivati....       meg    log       txt     06    meg facerecognition</span></span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt;  4: derivati....       meg    meg       fif     06    meg facerecognition</span></span>
-<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt;  5: derivati....       meg    log       txt     06    meg facerecognition</span></span>
-<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt;  6: derivati....       meg    meg       fif     06    meg facerecognition</span></span>
-<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  7: derivati....       meg    log       txt     06    meg facerecognition</span></span>
-<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  8: derivati....       meg    meg       fif     06    meg facerecognition</span></span>
-<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  9: derivati....       meg    log       txt     06    meg facerecognition</span></span>
-<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; 10: derivati....       meg    meg       fif     06    meg facerecognition</span></span>
-<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; 11: derivati....       meg    log       txt     06    meg facerecognition</span></span>
-<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a><span class="co">#&gt; 12: derivati....       meg    meg       fif     06    meg facerecognition</span></span>
-<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a><span class="co">#&gt; 13: derivati....       meg    log       txt     06    meg facerecognition</span></span>
-<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="co">#&gt; 14: derivati....       meg    meg       fif     06    meg facerecognition</span></span>
-<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co">#&gt;       proc   run</span></span>
-<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co">#&gt;     &lt;char&gt; &lt;int&gt;</span></span>
-<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co">#&gt;  1:    sss    NA</span></span>
-<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="co">#&gt;  2:    sss    NA</span></span>
-<span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a><span class="co">#&gt;  3:    sss     1</span></span>
-<span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a><span class="co">#&gt;  4:    sss     1</span></span>
-<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="co">#&gt;  5:    sss     2</span></span>
-<span id="cb13-40"><a href="#cb13-40" tabindex="-1"></a><span class="co">#&gt;  6:    sss     2</span></span>
-<span id="cb13-41"><a href="#cb13-41" tabindex="-1"></a><span class="co">#&gt;  7:    sss     3</span></span>
-<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="co">#&gt;  8:    sss     3</span></span>
-<span id="cb13-43"><a href="#cb13-43" tabindex="-1"></a><span class="co">#&gt;  9:    sss     4</span></span>
-<span id="cb13-44"><a href="#cb13-44" tabindex="-1"></a><span class="co">#&gt; 10:    sss     4</span></span>
-<span id="cb13-45"><a href="#cb13-45" tabindex="-1"></a><span class="co">#&gt; 11:    sss     5</span></span>
-<span id="cb13-46"><a href="#cb13-46" tabindex="-1"></a><span class="co">#&gt; 12:    sss     5</span></span>
-<span id="cb13-47"><a href="#cb13-47" tabindex="-1"></a><span class="co">#&gt; 13:    sss     6</span></span>
-<span id="cb13-48"><a href="#cb13-48" tabindex="-1"></a><span class="co">#&gt; 14:    sss     6</span></span></code></pre></div>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="co">#&gt;                                                                                                         parsed</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a><span class="co">#&gt;                                                                                                         &lt;AsIs&gt;</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a><span class="co">#&gt;  1:           derivatives/meg_derivatives/sub-06/ses-meg/sub-06_ses-meg_task-facerecognition_proc-sss_meg.json</span></span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a><span class="co">#&gt;  2:       derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_proc-sss_meg.json</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a><span class="co">#&gt;  3: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-01_proc-sss_log.txt</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a><span class="co">#&gt;  4: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-01_proc-sss_meg.fif</span></span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a><span class="co">#&gt;  5: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-02_proc-sss_log.txt</span></span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a><span class="co">#&gt;  6: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-02_proc-sss_meg.fif</span></span>
+<span id="cb13-25"><a href="#cb13-25" tabindex="-1"></a><span class="co">#&gt;  7: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-03_proc-sss_log.txt</span></span>
+<span id="cb13-26"><a href="#cb13-26" tabindex="-1"></a><span class="co">#&gt;  8: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-03_proc-sss_meg.fif</span></span>
+<span id="cb13-27"><a href="#cb13-27" tabindex="-1"></a><span class="co">#&gt;  9: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-04_proc-sss_log.txt</span></span>
+<span id="cb13-28"><a href="#cb13-28" tabindex="-1"></a><span class="co">#&gt; 10: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-04_proc-sss_meg.fif</span></span>
+<span id="cb13-29"><a href="#cb13-29" tabindex="-1"></a><span class="co">#&gt; 11: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-05_proc-sss_log.txt</span></span>
+<span id="cb13-30"><a href="#cb13-30" tabindex="-1"></a><span class="co">#&gt; 12: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-05_proc-sss_meg.fif</span></span>
+<span id="cb13-31"><a href="#cb13-31" tabindex="-1"></a><span class="co">#&gt; 13: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-06_proc-sss_log.txt</span></span>
+<span id="cb13-32"><a href="#cb13-32" tabindex="-1"></a><span class="co">#&gt; 14: derivatives/meg_derivatives/sub-06/ses-meg/meg/sub-06_ses-meg_task-facerecognition_run-06_proc-sss_meg.fif</span></span>
+<span id="cb13-33"><a href="#cb13-33" tabindex="-1"></a><span class="co">#&gt;     data_type suffix extension    sub    ses            task   proc   run</span></span>
+<span id="cb13-34"><a href="#cb13-34" tabindex="-1"></a><span class="co">#&gt;        &lt;char&gt; &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;          &lt;char&gt; &lt;char&gt; &lt;int&gt;</span></span>
+<span id="cb13-35"><a href="#cb13-35" tabindex="-1"></a><span class="co">#&gt;  1:     _root    meg      json     06    meg facerecognition    sss    NA</span></span>
+<span id="cb13-36"><a href="#cb13-36" tabindex="-1"></a><span class="co">#&gt;  2:       meg    meg      json     06    meg facerecognition    sss    NA</span></span>
+<span id="cb13-37"><a href="#cb13-37" tabindex="-1"></a><span class="co">#&gt;  3:       meg    log       txt     06    meg facerecognition    sss     1</span></span>
+<span id="cb13-38"><a href="#cb13-38" tabindex="-1"></a><span class="co">#&gt;  4:       meg    meg       fif     06    meg facerecognition    sss     1</span></span>
+<span id="cb13-39"><a href="#cb13-39" tabindex="-1"></a><span class="co">#&gt;  5:       meg    log       txt     06    meg facerecognition    sss     2</span></span>
+<span id="cb13-40"><a href="#cb13-40" tabindex="-1"></a><span class="co">#&gt;  6:       meg    meg       fif     06    meg facerecognition    sss     2</span></span>
+<span id="cb13-41"><a href="#cb13-41" tabindex="-1"></a><span class="co">#&gt;  7:       meg    log       txt     06    meg facerecognition    sss     3</span></span>
+<span id="cb13-42"><a href="#cb13-42" tabindex="-1"></a><span class="co">#&gt;  8:       meg    meg       fif     06    meg facerecognition    sss     3</span></span>
+<span id="cb13-43"><a href="#cb13-43" tabindex="-1"></a><span class="co">#&gt;  9:       meg    log       txt     06    meg facerecognition    sss     4</span></span>
+<span id="cb13-44"><a href="#cb13-44" tabindex="-1"></a><span class="co">#&gt; 10:       meg    meg       fif     06    meg facerecognition    sss     4</span></span>
+<span id="cb13-45"><a href="#cb13-45" tabindex="-1"></a><span class="co">#&gt; 11:       meg    log       txt     06    meg facerecognition    sss     5</span></span>
+<span id="cb13-46"><a href="#cb13-46" tabindex="-1"></a><span class="co">#&gt; 12:       meg    meg       fif     06    meg facerecognition    sss     5</span></span>
+<span id="cb13-47"><a href="#cb13-47" tabindex="-1"></a><span class="co">#&gt; 13:       meg    log       txt     06    meg facerecognition    sss     6</span></span>
+<span id="cb13-48"><a href="#cb13-48" tabindex="-1"></a><span class="co">#&gt; 14:       meg    meg       fif     06    meg facerecognition    sss     6</span></span></code></pre></div>
 </div>
 </div>
 <div id="filter-get-bids-entity" class="section level2">
@@ -733,9 +767,12 @@ electrode coordinates:</p>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>  )</span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>))</span>
 <span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>filter_result</span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt;          parsed data_type suffix extension    sub    ses            task   run</span></span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt;          &lt;AsIs&gt;    &lt;char&gt; &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;          &lt;char&gt; &lt;int&gt;</span></span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt; 1: sub-06/s....      func events       tsv     06    mri facerecognition     2</span></span></code></pre></div>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a><span class="co">#&gt;                                                                       parsed</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="co">#&gt;                                                                       &lt;AsIs&gt;</span></span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a><span class="co">#&gt; 1: sub-06/ses-mri/func/sub-06_ses-mri_task-facerecognition_run-02_events.tsv</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a><span class="co">#&gt;    data_type suffix extension    sub    ses            task   run</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt; &lt;char&gt;    &lt;char&gt; &lt;char&gt; &lt;char&gt;          &lt;char&gt; &lt;int&gt;</span></span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a><span class="co">#&gt; 1:      func events       tsv     06    mri facerecognition     2</span></span></code></pre></div>
 <p>The first column <code>&quot;filter_result&quot;</code> is the parsed file
 object with entity information:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>event_file <span class="ot">&lt;-</span> filter_result<span class="sc">$</span>parsed[[<span class="dv">1</span>]]</span>
